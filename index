@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercices & Nutrition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <section>
+      <h2>Exercices & Séances</h2>
+      <div id="exercices-list"></div>
+    </section>
+
+    <section>
+      <h2>Recettes</h2>
+      <div id="recettes-list"></div>
+    </section>
+  </div>
+
+  <!-- Charger la base de données d'abord -->
+  <script src="data.js"></script>
+
+  <!-- Script de génération dynamique du HTML -->
+  <script>
+    // Rendu des Exercices
+    const exercicesContainer = document.getElementById('exercices-list');
+    
+    exercicesData.forEach(ex => {
+      const card = document.createElement('article');
+      card.className = 'exercise-card';
+      card.innerHTML = `
+        <div class="exercise-header">
+          <h3 class="exercise-title">${ex.nom}</h3>
+          <div class="exercise-actions">
+            <button class="btn-more-info" aria-expanded="false" onclick="toggleDetails(this)">
+              <span>Détails</span>
+              <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path d="M7 10l5 5 5-5z"/>
+              </svg>
+            </button>
+            <a href="${ex.docteurFitnessUrl}" target="_blank" rel="noopener noreferrer" class="external-link" title="Voir sur Docteur Fitness">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="exercise-details" hidden>
+          <div class="details-content">
+            <div class="media-container">
+              <img src="${ex.gifUrl}" alt="${ex.nom}" loading="lazy">
+            </div>
+            <div class="info-container">
+              <div class="info-block">
+                <h4>Muscles sollicités</h4>
+                <ul>
+                  <li><strong>Principaux :</strong> ${ex.musclesPrincipaux.join(', ')}</li>
+                  <li><strong>Secondaires :</strong> ${ex.musclesSecondaires.join(', ')}</li>
+                </ul>
+              </div>
+              <div class="info-block">
+                <h4>Exécution</h4>
+                <ol>
+                  ${ex.execution.map(step => `<li>${step}</li>`).join('')}
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      exercicesContainer.appendChild(card);
+    });
+
+    // Rendu des Recettes
+    const recettesContainer = document.getElementById('recettes-list');
+    
+    recettesData.forEach(recette => {
+      const card = document.createElement('article');
+      card.className = 'recipe-card';
+      card.innerHTML = `
+        <h3>${recette.nom}</h3>
+        <ul>
+          ${recette.ingredients.map(ing => `<li><strong>${ing.nom} :</strong> ${ing.quantite}</li>`).join('')}
+        </ul>
+      `;
+      recettesContainer.appendChild(card);
+    });
+
+    // Interaction Accordéon
+    function toggleDetails(button) {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const card = button.closest('.exercise-card');
+      const details = card.querySelector('.exercise-details');
+      
+      button.setAttribute('aria-expanded', !isExpanded);
+      details.hidden = isExpanded;
+    }
+  </script>
+
+</body>
+</html>
