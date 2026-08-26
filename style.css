@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  padding: 16px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+/* Carte d'exercice */
+.exercise-card, .recipe-card {
+  background: #ffffff;
+  border: 1px solid #e1e4e8;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.exercise-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-more-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-more-info:hover {
+  background-color: #e5e7eb;
+}
+
+.external-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2563eb;
+  color: #ffffff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.external-link:hover {
+  background-color: #1d4ed8;
+}
+
+.arrow-icon {
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.btn-more-info[aria-expanded="true"] .arrow-icon {
+  transform: rotate(180deg);
+}
+
+.exercise-details {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.exercise-details[hidden] {
+  display: none;
+}
+
+.details-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .details-content {
+    grid-template-columns: 260px 1fr;
+  }
+}
+
+.media-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-block h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #2563eb;
+  margin-bottom: 4px;
+}
+
+.info-block ul, .info-block ol {
+  padding-left: 18px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+/* Style des recettes */
+.recipe-card ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
